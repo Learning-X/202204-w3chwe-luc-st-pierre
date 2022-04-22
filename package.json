@@ -1,0 +1,37 @@
+{
+  "name": "w3chwk-luc-st-pierre",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --verbose",
+    "jestwatch": "jest --watchAll --verbose",
+    "watch": "sass site/src/sass/styles.scss site/public/css/styles.css --watch",
+    "srvCompile": "sass site/src/sass/styles.scss site/public/css/styles.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.17.9",
+    "@types/jest": "^27.4.1",
+    "eslint": "^8.13.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "jest": "^27.5.1",
+    "sass": "^1.50.1"
+  },
+  "babel": {
+    "env": {
+      "test": {
+        "plugins": [
+          "@babel/plugin-transform-modules-commonjs"
+        ]
+      }
+    }
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
+  }
+}
