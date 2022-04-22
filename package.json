@@ -7,7 +7,8 @@
     "test": "jest --verbose",
     "jestwatch": "jest --watchAll --verbose",
     "watch": "sass site/src/sass/styles.scss site/public/css/styles.css --watch",
-    "compile": "sass site/src/sass/styles.scss site/public/css/styles.css"
+    "compile": "sass site/src/sass/styles.scss site/public/css/styles.css",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
@@ -20,7 +21,8 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
     "jest": "^27.5.1",
-    "sass": "^1.50.1"
+    "sass": "^1.50.1",
+    "husky": "^7.0.0"
   },
   "babel": {
     "env": {
