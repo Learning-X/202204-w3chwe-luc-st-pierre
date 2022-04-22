@@ -7,7 +7,7 @@
     "test": "jest --verbose",
     "jestwatch": "jest --watchAll --verbose",
     "watch": "sass site/src/sass/styles.scss site/public/css/styles.css --watch",
-    "srvCompile": "sass site/src/sass/styles.scss site/public/css/styles.css"
+    "compile": "sass site/src/sass/styles.scss site/public/css/styles.css"
   },
   "keywords": [],
   "author": "",
