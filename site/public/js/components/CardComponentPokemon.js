@@ -44,7 +44,7 @@ export default class CardComponentPokemon extends Component {
             <span class="info">info</span>
             <div class="btn-container">
               <button type="button" class="btn">
-                <span class="btn-text">view</span>
+                <span class="btn-text">add</span>
               </button>
             </div>
           </div>
