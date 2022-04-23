@@ -28,10 +28,11 @@ export default class AppComponent extends Component {
       </main>
 
       <div class="bottom-container">
-        <nav class="navigation">
-          <button class="btn navigation__previous">Prev</button>
-          <button class="btn navigation__next">Next</button>
-        </nav>
+
+          <div class="buttons">
+            <button class="button buttons__previous">Prev</button>
+            <button class="button buttons__next">Next</button>
+          </div>
       </div>
     `;
     this.renderGridlist();
