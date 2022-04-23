@@ -27,7 +27,7 @@ export default class AppComponent extends Component {
         </section>
       </main>
 
-       <div class="bottom-container">
+      <div class="bottom-container">
         <nav class="navigation">
           <button class="btn navigation__previous">Prev</button>
           <button class="btn navigation__next">Next</button>
