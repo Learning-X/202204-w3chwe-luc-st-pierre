@@ -42,14 +42,14 @@ const getFilterPokemonData = async () => {
   return pokemonArray;
 };
 
-const getNextPage = async () => {
-  const response = await fetch(pokeApiClient);
-  const jsonData = await response.json();
-  const nextPage = jsonData.next;
-  const previousPage = jsonData.previous;
-  // console.log(nextPage);
-};
+// const getNextPage = async () => {
+//   const response = await fetch(pokeApiClient);
+//   const jsonData = await response.json();
+//   const nextPage = jsonData.next;
+//   const previousPage = jsonData.previous;
+//   // console.log(nextPage);
+// };
 
-getNextPage();
+// getNextPage();
 
 export default getFilterPokemonData;
