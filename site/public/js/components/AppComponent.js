@@ -40,14 +40,12 @@ export default class AppComponent extends Component {
   async renderGridlist() {
     const gridlist = this.element.querySelector(".grid-list");
     const buttons = this.element.querySelector(".buttons");
+
     const pokemons = await this.applicationAPI.getAllPokemons();
 
     // eslint-disable-next-line no-new
-    new ButtonComponent(
-      buttons,
-      "button buttons__next",
-      "Next",
-      this.getNextPage
+    new ButtonComponent(buttons, "button buttons__next", "Next", async () =>
+      this.applicationAPI.getNextPage()
     );
 
     pokemons.forEach((pokemon) => new CardComponentPokemon(gridlist, pokemon));

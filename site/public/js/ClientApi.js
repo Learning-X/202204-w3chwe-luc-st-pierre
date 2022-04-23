@@ -9,13 +9,6 @@ export default class ClientApi {
     this.setInstanceApi();
   }
 
-  static async fetchPokemonList(apiEndpoint) {
-    const response = await fetch(apiEndpoint);
-    const jsonData = await response.json();
-    const data = jsonData.results;
-    return data;
-  }
-
   static async fetchPokemonData(pokemonList) {
     const promise = pokemonList.map(async (pokemon) => {
       const responseURLs = await fetch(pokemon.url);
@@ -25,6 +18,13 @@ export default class ClientApi {
 
     const result = await Promise.all(promise);
     return result;
+  }
+
+  static async fetchPokemonList(apiEndpoint) {
+    const response = await fetch(apiEndpoint);
+    const jsonData = await response.json();
+    const data = jsonData.results;
+    return data;
   }
 
   async getAllPokemons() {
@@ -51,6 +51,22 @@ export default class ClientApi {
   async setInstanceApi() {
     const pokemonsResponse = await fetch(this.currentPage);
     const results = await pokemonsResponse.json();
-    this.count = results;
+    this.count = results.count;
+    this.nextPage = results.next;
+    this.previousPage = results.previous;
+  }
+
+  async getNextPage() {
+    if (this.nextPage) {
+      this.currentPage = this.nextPage;
+      this.setInstanceApi();
+    }
+  }
+
+  async getPreviousPage() {
+    if (this.previousPage) {
+      this.currentPage = this.previousPage;
+      this.setInstanceApi();
+    }
   }
 }
