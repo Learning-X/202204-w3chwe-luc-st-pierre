@@ -49,7 +49,8 @@ export default class ClientApi {
   }
 
   async setInstanceApi() {
-    const pokemones = await fetch(this.currentPage);
-    const pokemonJson = await pokemones.json();
+    const pokemonsResponse = await fetch(this.currentPage);
+    const results = await pokemonsResponse.json();
+    this.count = results;
   }
 }
