@@ -54,6 +54,7 @@ const setApiData = async () => {
   count = jsonPokemons.count;
   nextPage = jsonPokemons.next;
   previousPage = jsonPokemons.previous;
+  return count;
 };
 
 export const getNextPage = async () => {
