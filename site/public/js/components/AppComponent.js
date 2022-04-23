@@ -5,12 +5,10 @@ import Component from "./Component.js";
 export default class AppComponent extends Component {
   applicationAPI;
 
-  constructor(parentElement, applicationAPI, getNextPage, getPreviousPage) {
+  constructor(parentElement, applicationAPI) {
     super(parentElement, "container", "div");
     this.applicationAPI = applicationAPI;
 
-    this.getNextPage = getNextPage;
-    this.getPreviousPage = getPreviousPage;
     this.render();
   }
 
@@ -42,7 +40,7 @@ export default class AppComponent extends Component {
   async renderGridlist() {
     const gridlist = this.element.querySelector(".grid-list");
     const buttons = this.element.querySelector(".buttons");
-    const pokemons = await this.applicationAPI();
+    const pokemons = await this.applicationAPI.getAllPokemons();
 
     // eslint-disable-next-line no-new
     new ButtonComponent(
