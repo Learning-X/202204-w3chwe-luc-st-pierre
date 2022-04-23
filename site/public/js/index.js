@@ -1,4 +1,6 @@
-// import getFilterPokemonData from "./localAPI.js";
+import AppComponent from "./components/AppComponent.js";
+import getFilterPokemonData from "./localAPI.js";
 
-// const pokemons = await getFilterPokemonData();
-// console.log(pokemons);
+const mainContainer = document.querySelector(".app");
+
+const App = new AppComponent(mainContainer, getFilterPokemonData);

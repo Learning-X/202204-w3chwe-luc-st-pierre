@@ -3,7 +3,7 @@ export default class Component {
 
   constructor(parentElement, className, htmlTag) {
     this.element = document.createElement(htmlTag);
-    this.className = className;
+    this.element.className = className;
     parentElement.append(this.element);
   }
 }
