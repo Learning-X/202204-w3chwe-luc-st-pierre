@@ -52,7 +52,7 @@ export default class AppComponent extends Component {
               </div>
             </div>
           </div>
-         </div>
+          </div>
         </a>
 
         <div class="card__content">
