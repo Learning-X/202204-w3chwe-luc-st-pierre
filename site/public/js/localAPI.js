@@ -8,7 +8,7 @@ const fetchPokemons = async () => {
   return data;
 };
 
-const getPokemonData = async () => {
+const fetchPokemonData = async () => {
   const allPokemons = await fetchPokemons(pokeApiClient);
 
   const promise = allPokemons.map(async (pokemon) => {
@@ -22,8 +22,8 @@ const getPokemonData = async () => {
   return pokemonList;
 };
 
-const filterPokemonData = async () => {
-  const pokemons = await getPokemonData();
+const getFilterPokemonData = async () => {
+  const pokemons = await fetchPokemonData();
 
   const pokemonArray = [];
   for (const pokemon of pokemons) {
@@ -41,4 +41,4 @@ const filterPokemonData = async () => {
   return pokemonArray;
 };
 
-export default filterPokemonData;
+export default getFilterPokemonData;
