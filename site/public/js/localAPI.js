@@ -14,6 +14,7 @@ const fetchPokemonData = async () => {
   const promise = allPokemons.map(async (pokemon) => {
     const responseURLs = await fetch(pokemon.url);
     const jsonResponseURLs = await responseURLs.json();
+
     return jsonResponseURLs;
   });
 
@@ -40,5 +41,15 @@ const getFilterPokemonData = async () => {
   }
   return pokemonArray;
 };
+
+const getNextPage = async () => {
+  const response = await fetch(pokeApiClient);
+  const jsonData = await response.json();
+  const nextPage = jsonData.next;
+  const previousPage = jsonData.previous;
+  // console.log(nextPage);
+};
+
+getNextPage();
 
 export default getFilterPokemonData;
