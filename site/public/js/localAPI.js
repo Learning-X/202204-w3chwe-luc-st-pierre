@@ -60,6 +60,7 @@ const setApiData = async () => {
 export const getNextPage = async () => {
   if (nextPage) {
     currentPage = nextPage;
+    // console.log(currentPage);
     setApiData();
   }
 };
