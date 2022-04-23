@@ -1,41 +1,17 @@
 import Component from "./Component.js";
 
-export default class AppComponent extends Component {
-  applicationAPI;
+export default class CardComponentPokemon extends Component {
+  name;
 
-  constructor(parentElement, applicationAPI) {
-    super(parentElement, "container", "div");
-    this.pokemonAPI = applicationAPI;
+  constructor(parentElement, { name }) {
+    super(parentElement, "grid-item", "li");
+    this.name = name;
 
     this.render();
   }
 
   render() {
     this.element.innerHTML = `
-      <div class="header-container">
-        <header class="header">
-          <p class="header__subtitle">All the Pokémon in one place</p>
-          <h1 class="header__title">Create your collection</h1>
-        </header>
-      </div>
-
-      <main class="main">
-        <section>
-          <ul class="grid-list">
-          </ul>
-        </section>
-      </main>
-    `;
-    this.renderGridlist();
-  }
-
-  async renderGridlist() {
-    const gridlist = this.element.querySelector(".grid-list");
-
-    this.pokemonAPI.array.forEach((pokemon) => {});
-
-    gridlist.innerHTML = `
-    <li class="grid-item">
       <div class="card-container">
         <a href="#" class="card-container__link">
           <div class="card">
@@ -59,7 +35,7 @@ export default class AppComponent extends Component {
 
         <div class="card__content">
           <a href="#" class="card__content-wrapper">
-            <h6 class="card__content-title">title</h6>
+            <h6 class="card__content-title">${this.name}</h6>
           </a>
 
           <div class="card__content-info">
@@ -72,7 +48,6 @@ export default class AppComponent extends Component {
           </div>
         </div>
       </div>
-    </li>
     `;
   }
 }
