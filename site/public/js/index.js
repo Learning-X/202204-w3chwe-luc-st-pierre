@@ -1,4 +1,4 @@
-import getPokemonData from "./localAPI.js";
+import filterPokemonData from "./localAPI.js";
 
-const pokemons = await getPokemonData();
+const pokemons = await filterPokemonData();
 // console.log(pokemons);

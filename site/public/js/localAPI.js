@@ -22,4 +22,23 @@ const getPokemonData = async () => {
   return pokemonList;
 };
 
-export default getPokemonData;
+const filterPokemonData = async () => {
+  const pokemons = await getPokemonData();
+
+  const pokemonArray = [];
+  for (const pokemon of pokemons) {
+    const pokemonFilterred = {
+      id: pokemon.id,
+      name: pokemon.name,
+      habilities: [],
+      imgUrl: pokemon?.sprites.other.dream_world.front_default,
+      height: pokemon.height,
+      weight: pokemon.weight,
+      types: [],
+    };
+    pokemonArray.push(pokemonFilterred);
+  }
+  return pokemonArray;
+};
+
+export default filterPokemonData;
