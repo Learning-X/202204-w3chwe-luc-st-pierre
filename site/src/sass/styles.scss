@@ -110,15 +110,24 @@ body {
       transition: all 0.2s ease-out;
     }
 
-    &__image {
-      background-position: 50% 40%;
-      background-size: 70%;
-      background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/16.svg);
-
+    &-image__container {
       inset: 0;
+      height: 320px;
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &__image {
+      // background-position: 80% 40%;
+      // background-size: 70%;
+      margin-top: 2rem;
+      max-width: 80%;
+      height: auto;
       position: absolute;
       transition: all 0.2s ease-out;
-      background-repeat: no-repeat;
+      // background-repeat: no-repeat;
     }
 
     &-media__root {
@@ -181,7 +190,7 @@ body {
 
   &:hover .card__image {
     filter: brightness(0.9);
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
 }
 

@@ -3,10 +3,10 @@ import Component from "./Component.js";
 export default class CardComponentPokemon extends Component {
   name;
 
-  constructor(parentElement, { name }) {
+  constructor(parentElement, { name, imgUrl }) {
     super(parentElement, "grid-item", "li");
     this.name = name;
-
+    this.imgUrl = imgUrl;
     this.render();
   }
 
@@ -16,7 +16,9 @@ export default class CardComponentPokemon extends Component {
         <a href="#" class="card-container__link">
           <div class="card">
           <div class="card__box"></div>
-          <div class="card__image"></div>
+          <div class="card-image__container">
+            <img src="${this.imgUrl}" class="card__image" />
+          </div>
           <div class="card-media__root">
             <div class="root-container">
               <div class="root-container__left space">

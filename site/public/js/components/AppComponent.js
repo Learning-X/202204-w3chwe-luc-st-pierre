@@ -1,3 +1,4 @@
+import CardComponentPokemon from "./CardComponentPokemon.js";
 import Component from "./Component.js";
 
 export default class AppComponent extends Component {
@@ -5,7 +6,7 @@ export default class AppComponent extends Component {
 
   constructor(parentElement, applicationAPI) {
     super(parentElement, "container", "div");
-    this.pokemonAPI = applicationAPI;
+    this.applicationAPI = applicationAPI;
 
     this.render();
   }
@@ -32,47 +33,8 @@ export default class AppComponent extends Component {
   async renderGridlist() {
     const gridlist = this.element.querySelector(".grid-list");
 
-    this.pokemonAPI.array.forEach((pokemon) => {});
+    const pokemons = await this.applicationAPI();
 
-    gridlist.innerHTML = `
-    <li class="grid-item">
-      <div class="card-container">
-        <a href="#" class="card-container__link">
-          <div class="card">
-          <div class="card__box"></div>
-          <div class="card__image"></div>
-          <div class="card-media__root">
-            <div class="root-container">
-              <div class="root-container__left space">
-                <i class="icon space">icon</i>
-                <span class="icon-info space">info</span>
-              </div>
-
-              <div class="root-container__right space">
-                <i class="icon space">icon</i>
-                <span class="icon-info space">info</span>
-              </div>
-            </div>
-          </div>
-          </div>
-        </a>
-
-        <div class="card__content">
-          <a href="#" class="card__content-wrapper">
-            <h6 class="card__content-title">title</h6>
-          </a>
-
-          <div class="card__content-info">
-            <span class="info">info</span>
-            <div class="btn-container">
-              <button type="button" class="btn">
-                <span class="btn-text">view</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </li>
-    `;
+    pokemons.forEach((pokemon) => new CardComponentPokemon(gridlist, pokemon));
   }
 }
