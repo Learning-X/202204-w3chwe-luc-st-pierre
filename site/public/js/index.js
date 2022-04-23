@@ -1,10 +1,4 @@
-const pokeApiClient = "https://pokeapi.co/api/v2/pokemon";
+// import getFilterPokemonData from "./localAPI.js";
 
-const getAllPokemons = async () => {
-  const response = await fetch(pokeApiClient);
-  const data = await response.json();
-  // console.log(data);
-  return data;
-};
-
-getAllPokemons();
+// const pokemons = await getFilterPokemonData();
+// console.log(pokemons);
