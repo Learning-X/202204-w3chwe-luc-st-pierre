@@ -3,4 +3,4 @@ import getFilterPokemonData from "./localAPI.js";
 
 const mainContainer = document.querySelector(".app");
 
-const App = new AppComponent(mainContainer, getFilterPokemonData);
+new AppComponent(mainContainer, getFilterPokemonData);
