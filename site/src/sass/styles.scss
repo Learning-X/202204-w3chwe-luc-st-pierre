@@ -18,15 +18,20 @@ li {
 
 body {
   background-color: #222326;
+  //  background-color: #2a2c2f;
+  font-family: "Roboto", sans-serif;
 }
 
 .app {
+  max-width: 1280px;
   display: flex;
   flex-direction: column;
+  margin: 0 auto 3rem;
 }
 
 // header
 .header-container {
+  margin: 3rem 0;
   display: flex;
   justify-content: center;
 }
@@ -36,6 +41,23 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  &__subtitle {
+    color: #ed1a5c;
+    font-size: 1.3rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    line-height: 2.66;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    letter-spacing: 2px;
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1.167;
+    text-transform: uppercase;
+  }
 }
 
 // main
@@ -90,7 +112,7 @@ body {
 
     &__image {
       background-position: 50% 40%;
-      background-size: 80%;
+      background-size: 70%;
       background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/16.svg);
 
       inset: 0;
@@ -119,7 +141,7 @@ body {
 
         & .root-container__left,
         .root-container__right {
-          color: #000;
+          color: #fff;
           height: 28px;
           font-size: 13px;
           background: rgba(255, 255, 255, 0.2);
@@ -152,6 +174,15 @@ body {
       }
     }
   }
+
+  &:hover {
+    filter: brightness(1.1);
+  }
+
+  &:hover .card__image {
+    filter: brightness(0.9);
+    transform: scale(1.2);
+  }
 }
 
 .card__content {
@@ -177,13 +208,13 @@ body {
     display: -webkit-box;
     overflow: hidden;
     word-break: break-word;
-    font-weight: 700;
+    letter-spacing: 2px;
+    font-weight: 900;
     padding-top: 8px;
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     margin-bottom: 0.35em;
-
     font-size: 18px;
     line-height: 1.6;
     text-transform: uppercase;
@@ -201,7 +232,7 @@ body {
       color: #fff;
       text-align: left;
       font-size: 20px;
-      font-weight: bold;
+      font-weight: 400;
       flex-grow: 0;
       max-width: 50%;
       flex-basis: 50%;
@@ -244,6 +275,12 @@ body {
           width: 100%;
           align-items: inherit;
           justify-content: inherit;
+        }
+
+        &:hover {
+          background-color: rgb(14, 107, 146);
+          box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%),
+            0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
         }
       }
     }
