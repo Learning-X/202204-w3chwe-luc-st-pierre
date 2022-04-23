@@ -1,5 +1,10 @@
 const pokeApiClient = "https://pokeapi.co/api/v2/pokemon";
 
+let nextPage;
+let previousPage;
+let currentPage = pokeApiClient;
+let count;
+
 const fetchPokemons = async () => {
   const response = await fetch(pokeApiClient);
   const jsonData = await response.json();
@@ -42,14 +47,27 @@ const getFilterPokemonData = async () => {
   return pokemonArray;
 };
 
-// const getNextPage = async () => {
-//   const response = await fetch(pokeApiClient);
-//   const jsonData = await response.json();
-//   const nextPage = jsonData.next;
-//   const previousPage = jsonData.previous;
-//   // console.log(nextPage);
-// };
+const setApiData = async () => {
+  const pokemons = await fetch(currentPage);
+  const jsonPokemons = await pokemons.json();
 
-// getNextPage();
+  count = jsonPokemons.count;
+  nextPage = jsonPokemons.next;
+  previousPage = jsonPokemons.previous;
+};
+
+export const getNextPage = async () => {
+  if (nextPage) {
+    currentPage = nextPage;
+    setApiData();
+  }
+};
+
+export const getPreviousPage = async () => {
+  if (previousPage) {
+    currentPage = nextPage;
+    setApiData();
+  }
+};
 
 export default getFilterPokemonData;
