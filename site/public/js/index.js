@@ -1,4 +1,7 @@
-// import getFilterPokemonData from "./localAPI.js";
+import AppComponent from "./components/AppComponent.js";
+import getFilterPokemonData from "./localAPI.js";
 
-// const pokemons = await getFilterPokemonData();
-// console.log(pokemons);
+const mainContainer = document.querySelector(".app");
+
+// eslint-disable-next-line no-new
+new AppComponent(mainContainer, getFilterPokemonData);
