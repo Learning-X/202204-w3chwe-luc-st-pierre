@@ -13,6 +13,7 @@ export default class ButtonComponent extends Component {
   }
 
   render() {
+    this.element.type = "button";
     this.element.textContent = this.text;
   }
 

@@ -1,13 +1,16 @@
+import ButtonComponent from "./ButtonComponent.js";
 import CardComponentPokemon from "./CardComponentPokemon.js";
 import Component from "./Component.js";
 
 export default class AppComponent extends Component {
   applicationAPI;
 
-  constructor(parentElement, applicationAPI) {
+  constructor(parentElement, applicationAPI, getNextPage, getPreviousPage) {
     super(parentElement, "container", "div");
     this.applicationAPI = applicationAPI;
 
+    this.getNextPage = getNextPage;
+    this.getPreviousPage = getPreviousPage;
     this.render();
   }
 
@@ -28,11 +31,9 @@ export default class AppComponent extends Component {
       </main>
 
       <div class="bottom-container">
-
-          <div class="buttons">
-            <button class="button buttons__previous">Prev</button>
-            <button class="button buttons__next">Next</button>
-          </div>
+        <div class="buttons">
+          <button class="button buttons__previous">Prev</button>
+        </div>
       </div>
     `;
     this.renderGridlist();
@@ -40,8 +41,16 @@ export default class AppComponent extends Component {
 
   async renderGridlist() {
     const gridlist = this.element.querySelector(".grid-list");
-
+    const buttons = this.element.querySelector(".buttons");
     const pokemons = await this.applicationAPI();
+
+    // eslint-disable-next-line no-new
+    new ButtonComponent(
+      buttons,
+      "button buttons__next",
+      "Next",
+      this.getNextPage
+    );
 
     pokemons.forEach((pokemon) => new CardComponentPokemon(gridlist, pokemon));
   }
