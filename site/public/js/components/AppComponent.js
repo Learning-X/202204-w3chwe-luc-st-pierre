@@ -30,24 +30,50 @@ export default class AppComponent extends Component {
 
       <div class="bottom-container">
         <div class="buttons">
-          <button class="button buttons__previous">Prev</button>
         </div>
       </div>
     `;
     this.renderGridlist();
   }
 
+  static addPokemonToCollection(pokemon) {
+    // console.log(pokemon);
+    return pokemon;
+  }
+
   async renderGridlist() {
+    const pokemons = await this.applicationAPI.getAllPokemons();
+
     const gridlist = this.element.querySelector(".grid-list");
+    gridlist.innerHTML = "";
+
     const buttons = this.element.querySelector(".buttons");
 
-    const pokemons = await this.applicationAPI.getAllPokemons();
+    // eslint-disable-next-line no-new
+    new ButtonComponent(buttons, "button buttons__previous", "Prev", async () =>
+      this.applicationAPI.getPreviousPage()
+    );
 
     // eslint-disable-next-line no-new
     new ButtonComponent(buttons, "button buttons__next", "Next", async () =>
       this.applicationAPI.getNextPage()
     );
 
-    pokemons.forEach((pokemon) => new CardComponentPokemon(gridlist, pokemon));
+    pokemons.forEach((pokemon) => {
+      const card = new CardComponentPokemon(gridlist, pokemon);
+
+      const btnContainer = card.element.querySelector(".btn-container");
+
+      // eslint-disable-next-line no-new
+      new ButtonComponent(btnContainer, "btn", "", () =>
+        AppComponent.addPokemonToCollection(pokemon)
+      );
+
+      const buttonContainer = card.element.querySelector(".btn");
+      const spanText = document.createElement("span");
+      spanText.textContent = "add";
+      spanText.className = "btn-text";
+      buttonContainer.append(spanText);
+    });
   }
 }
