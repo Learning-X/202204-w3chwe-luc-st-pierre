@@ -5,17 +5,20 @@ export default class PokemonApi {
     this.apiEntryPoint = apiEntryPoint;
   }
 
-  async sendPokemon(pokemon) {
-    const data = pokemon;
-
+  async addPokemon(pokemon) {
+    const ressource = pokemon;
     const pokemonObject = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: await JSON.stringify(data),
+      body: await JSON.stringify(ressource),
     };
 
-    const response = await fetch(this.apiEntryPoint, pokemonObject);
-    const jsonResponse = await response.json();
-    return jsonResponse;
+    try {
+      const response = await fetch(this.apiEntryPoint, pokemonObject);
+      const jsonResponse = await response.json();
+      return jsonResponse;
+    } catch (error) {
+      throw new Error(error.toString());
+    }
   }
 }
