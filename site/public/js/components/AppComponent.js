@@ -1,6 +1,7 @@
 import ButtonComponent from "./ButtonComponent.js";
 import CardComponentPokemon from "./CardComponentPokemon.js";
 import Component from "./Component.js";
+import NavbarComponent from "./NavbarComponent.js";
 
 export default class AppComponent extends Component {
   applicationAPI;
@@ -12,8 +13,12 @@ export default class AppComponent extends Component {
     this.render();
   }
 
+  // <nav class="navbar"></nav>
   render() {
     this.element.innerHTML = `
+    <div class="navbar-container">
+    </div>
+    <main class="main">
       <div class="header-container">
         <header class="header">
           <p class="header__subtitle">All the Pokémon in one place</p>
@@ -21,7 +26,6 @@ export default class AppComponent extends Component {
         </header>
       </div>
 
-      <main class="main">
         <section>
           <ul class="grid-list">
           </ul>
@@ -43,6 +47,11 @@ export default class AppComponent extends Component {
 
   async renderGridlist() {
     const pokemons = await this.applicationAPI.getAllPokemons();
+
+    const navbarContainer = this.element.querySelector(".navbar-container");
+
+    // eslint-disable-next-line no-new
+    new NavbarComponent(navbarContainer);
 
     const gridlist = this.element.querySelector(".grid-list");
     gridlist.innerHTML = "";
