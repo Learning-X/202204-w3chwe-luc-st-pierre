@@ -81,8 +81,8 @@ export default class AppComponent extends Component {
     new ModalComponent(mainContainer);
 
     const modal = document.querySelector("#myModal");
-    const btn = document.querySelector(".myBtn");
-    const span = document.getElementsByClassName("close")[0];
+    // const btn = document.querySelector(".myBtn");
+    // const span = document.getElementsByClassName("close")[0];
 
     // eslint-disable-next-line no-new
     new ButtonComponent(mainContainer, "myBtn", "Open Modal", () => {
