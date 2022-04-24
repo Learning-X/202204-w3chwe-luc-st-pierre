@@ -21,4 +21,13 @@ export default class PokemonApi {
       throw new Error(error.toString());
     }
   }
+
+  async deletePokemon(id) {
+    const url = `${this.apiEntryPoint}/${id}`;
+    const ressource = {
+      method: "DELETE",
+    };
+    const responseJson = (await fetch(url, ressource)).json();
+    return responseJson;
+  }
 }
