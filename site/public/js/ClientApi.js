@@ -3,9 +3,14 @@ export default class ClientApi {
   previousPage;
   currentPage;
   count;
+  totalPages;
+  itemPerPage = 20;
+  pageOffset;
+  pageNumber;
 
   constructor(apiEntryPoint) {
     this.currentPage = apiEntryPoint;
+
     this.setInstanceApi();
   }
 
@@ -54,7 +59,8 @@ export default class ClientApi {
     this.count = results.count;
     this.nextPage = results.next;
     this.previousPage = results.previous;
-    // console.log(this.count);
+    this.totalPages = Math.ceil(this.count / 20);
+    return this.totalPages;
   }
 
   async getNextPage() {
@@ -69,5 +75,19 @@ export default class ClientApi {
       this.currentPage = this.previousPage;
       this.setInstanceApi();
     }
+  }
+
+  async getCurrentPageNumber() {
+    if (this.currentPage !== null) {
+      const stringParameter = this.currentPage.split("?")[1];
+      const queryString = new URLSearchParams(stringParameter);
+      this.pageOffset = queryString.get("offset");
+    }
+
+    this.pageNumber = this.currentPage
+      ? Math.floor(this.pageOffset / this.itemPerPage)
+      : this.pageOffset / this.itemPerPage + 1;
+
+    return this.pageNumber;
   }
 }

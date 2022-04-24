@@ -360,6 +360,15 @@ body {
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 
+  .page-count {
+    margin-right: 2rem;
+    height: 100%;
+    color: #fff;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+
   .buttons {
     height: 100%;
     display: flex;
