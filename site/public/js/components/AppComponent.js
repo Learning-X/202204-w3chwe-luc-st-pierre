@@ -40,14 +40,58 @@ export default class AppComponent extends Component {
         </div>
       </div>
     `;
-    this.renderGridlist();
+
     this.renderNavbar();
     this.renderButtons();
+    this.getUrl();
     AppComponent.renderModal();
   }
 
+  getUrl() {
+    return window.location.pathname === "/site/public/index.html"
+      ? this.renderGridlist()
+      : this.renderMyPokemonGridlist();
+  }
+
+  async renderMyPokemonGridlist() {
+    const pokemons = await this.pokemonApi.getAllPokemonApi();
+
+    const gridlist = this.element.querySelector(".grid-list");
+    gridlist.innerHTML = "";
+
+    pokemons.forEach((pokemon) => {
+      const card = new CardComponentPokemon(gridlist, pokemon);
+
+      const btnContainer = card.element.querySelector(".btn-container");
+
+      // eslint-disable-next-line no-new
+      new ButtonComponent(btnContainer, "btn", "", async () => {
+        this.pokemonApi.removePokemon(pokemon.id);
+
+        setTimeout(() => {
+          this.renderMyPokemonGridlist();
+        }, 300);
+      });
+
+      const buttonContainer = card.element.querySelector(".btn");
+      const spanText = document.createElement("span");
+      spanText.textContent = "remove";
+      spanText.className = "btn-text";
+      buttonContainer.append(spanText);
+
+      const modal = document.querySelector("#myModal");
+
+      const anchorTag = card.element.querySelector("#view-item");
+      anchorTag.addEventListener("click", () => {
+        modal.style.display = "block";
+      });
+    });
+
+    this.getCurrentPageNumber();
+  }
+
   async renderGridlist() {
-    const pokemons = await this.clientApi.getAllPokemons();
+    const pokemons = await this.clientApi.getAllPokemonClientApi();
 
     const gridlist = this.element.querySelector(".grid-list");
     gridlist.innerHTML = "";

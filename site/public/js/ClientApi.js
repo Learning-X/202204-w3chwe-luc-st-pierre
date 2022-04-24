@@ -33,7 +33,7 @@ export default class ClientApi {
     return data;
   }
 
-  async getAllPokemons() {
+  async getAllPokemonClientApi() {
     const pokemonsList = await ClientApi.fetchPokemonList(this.currentPage);
     const filteredPokemons = await ClientApi.fetchPokemonData(pokemonsList);
 
