@@ -18,6 +18,7 @@ export default class ClientApi {
     const promise = pokemonList.map(async (pokemon) => {
       const responseURLs = await fetch(pokemon.url);
       const jsonResponseURLs = await responseURLs.json();
+
       return jsonResponseURLs;
     });
 

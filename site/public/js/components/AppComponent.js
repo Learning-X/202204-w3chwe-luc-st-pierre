@@ -5,10 +5,13 @@ import ModalComponent from "./ModalComponent.js";
 import NavbarComponent from "./NavbarComponent.js";
 
 export default class AppComponent extends Component {
-  applicationAPI;
-  constructor(parentElement, applicationAPI) {
+  clientApi;
+  pokemonApi;
+
+  constructor(parentElement, pokemonApi, clientApi) {
     super(parentElement, "container", "div");
-    this.applicationAPI = applicationAPI;
+    this.clientApi = clientApi;
+    this.pokemonApi = pokemonApi;
 
     this.render();
   }
@@ -49,7 +52,7 @@ export default class AppComponent extends Component {
   }
 
   async renderGridlist() {
-    const pokemons = await this.applicationAPI.getAllPokemons();
+    const pokemons = await this.clientApi.getAllPokemons();
 
     const gridlist = this.element.querySelector(".grid-list");
     gridlist.innerHTML = "";
@@ -60,11 +63,9 @@ export default class AppComponent extends Component {
       const btnContainer = card.element.querySelector(".btn-container");
 
       // eslint-disable-next-line no-new
-      new ButtonComponent(btnContainer, "btn", "", () =>
-        window.location.assign(
-          `./pokemon-details.html?id=${pokemon.id}&api=${this.applicationAPI}`
-        )
-      );
+      new ButtonComponent(btnContainer, "btn", "", async () => {
+        this.pokemonApi.sendPokemon(pokemon);
+      });
 
       const buttonContainer = card.element.querySelector(".btn");
       const spanText = document.createElement("span");
@@ -98,12 +99,12 @@ export default class AppComponent extends Component {
   }
 
   async nextPage() {
-    this.applicationAPI.getNextPage();
+    this.clientApi.getNextPage();
     this.renderGridlist();
   }
 
   async previousPage() {
-    this.applicationAPI.getPreviousPage();
+    this.clientApi.getPreviousPage();
     this.renderGridlist();
   }
 
@@ -122,10 +123,10 @@ export default class AppComponent extends Component {
   }
 
   async getCurrentPageNumber() {
-    const pageNumber = await this.applicationAPI.getCurrentPageNumber();
+    const pageNumber = await this.clientApi.getCurrentPageNumber();
     const pageCount = this.element.querySelector(".buttons .page-count");
     pageCount.textContent = `page ${pageNumber + 1} of ${
-      this.applicationAPI.totalPages
+      this.clientApi.totalPages
     }`;
   }
 }
