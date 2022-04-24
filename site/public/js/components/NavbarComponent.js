@@ -19,10 +19,10 @@ export default class NavbarComponent extends Component {
 
           <ul class="navbar__menu">
             <li class="menu__item">
-              <a href="" class="menu__item-link">Home</a>
+              <a href="index.html" class="menu__item-link">Home</a>
             </li>
             <li class="menu__item" class="menu__item-link">
-              <a href="" class="menu__item-link">My Pokémon</a>
+              <a href="my-pokemon.html" class="menu__item-link">My Pokémon</a>
             </li>
           </ul>
         </nav>

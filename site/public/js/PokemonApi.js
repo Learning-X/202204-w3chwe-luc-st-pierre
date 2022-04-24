@@ -5,6 +5,12 @@ export default class PokemonApi {
     this.apiEntryPoint = apiEntryPoint;
   }
 
+  async getAllPokemonApi() {
+    const result = await fetch(this.apiEntryPoint);
+    const json = await result.json();
+    return json;
+  }
+
   async addPokemon(pokemon) {
     const ressource = pokemon;
     const pokemonObject = {
