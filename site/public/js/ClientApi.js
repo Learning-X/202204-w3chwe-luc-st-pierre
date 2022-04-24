@@ -54,6 +54,7 @@ export default class ClientApi {
     this.count = results.count;
     this.nextPage = results.next;
     this.previousPage = results.previous;
+    // console.log(this.count);
   }
 
   async getNextPage() {

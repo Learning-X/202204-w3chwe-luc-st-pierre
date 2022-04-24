@@ -5,7 +5,6 @@ import NavbarComponent from "./NavbarComponent.js";
 
 export default class AppComponent extends Component {
   applicationAPI;
-
   constructor(parentElement, applicationAPI) {
     super(parentElement, "container", "div");
     this.applicationAPI = applicationAPI;
@@ -84,12 +83,17 @@ export default class AppComponent extends Component {
     this.renderGridlist();
   }
 
+  async previousPage() {
+    this.applicationAPI.getPreviousPage();
+    this.renderGridlist();
+  }
+
   renderButtons() {
     const buttons = this.element.querySelector(".buttons");
 
     // eslint-disable-next-line no-new
     new ButtonComponent(buttons, "button buttons__previous", "Prev", async () =>
-      this.applicationAPI.getPreviousPage()
+      this.previousPage()
     );
 
     // eslint-disable-next-line no-new
