@@ -92,9 +92,6 @@ export default class AppComponent extends Component {
 
   async renderButtons() {
     const buttons = this.element.querySelector(".buttons");
-    // const pageCount = this.element.querySelector(".buttons .page-count");
-    // const numberOfPAges = await this.applicationAPI.setInstanceApi();
-    // pageCount.textContent = `page ${1} of ${numberOfPAges}`;
 
     // eslint-disable-next-line no-new
     new ButtonComponent(buttons, "button buttons__previous", "Prev", async () =>
