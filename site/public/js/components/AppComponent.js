@@ -13,7 +13,6 @@ export default class AppComponent extends Component {
     this.render();
   }
 
-  // <nav class="navbar"></nav>
   render() {
     this.element.innerHTML = `
     <div class="navbar-container">
@@ -38,6 +37,8 @@ export default class AppComponent extends Component {
       </div>
     `;
     this.renderGridlist();
+    this.renderNavbar();
+    this.renderButtons();
   }
 
   static addPokemonToCollection(pokemon) {
@@ -48,14 +49,42 @@ export default class AppComponent extends Component {
   async renderGridlist() {
     const pokemons = await this.applicationAPI.getAllPokemons();
 
+    const gridlist = this.element.querySelector(".grid-list");
+    gridlist.innerHTML = "";
+
+    pokemons.forEach((pokemon) => {
+      const card = new CardComponentPokemon(gridlist, pokemon);
+
+      const btnContainer = card.element.querySelector(".btn-container");
+
+      // eslint-disable-next-line no-new
+      new ButtonComponent(btnContainer, "btn", "", () =>
+        window.location.assign(
+          `./pokemon-details.html?id=${pokemon.id}&api=${this.applicationAPI}`
+        )
+      );
+
+      const buttonContainer = card.element.querySelector(".btn");
+      const spanText = document.createElement("span");
+      spanText.textContent = "add";
+      spanText.className = "btn-text";
+      buttonContainer.append(spanText);
+    });
+  }
+
+  renderNavbar() {
     const navbarContainer = this.element.querySelector(".navbar-container");
 
     // eslint-disable-next-line no-new
     new NavbarComponent(navbarContainer);
+  }
 
-    const gridlist = this.element.querySelector(".grid-list");
-    gridlist.innerHTML = "";
+  async nextPage() {
+    this.applicationAPI.getNextPage();
+    this.renderGridlist();
+  }
 
+  renderButtons() {
     const buttons = this.element.querySelector(".buttons");
 
     // eslint-disable-next-line no-new
@@ -65,24 +94,7 @@ export default class AppComponent extends Component {
 
     // eslint-disable-next-line no-new
     new ButtonComponent(buttons, "button buttons__next", "Next", async () =>
-      this.applicationAPI.getNextPage()
+      this.nextPage()
     );
-
-    pokemons.forEach((pokemon) => {
-      const card = new CardComponentPokemon(gridlist, pokemon);
-
-      const btnContainer = card.element.querySelector(".btn-container");
-
-      // eslint-disable-next-line no-new
-      new ButtonComponent(btnContainer, "btn", "", () =>
-        AppComponent.addPokemonToCollection(pokemon)
-      );
-
-      const buttonContainer = card.element.querySelector(".btn");
-      const spanText = document.createElement("span");
-      spanText.textContent = "add";
-      spanText.className = "btn-text";
-      buttonContainer.append(spanText);
-    });
   }
 }
