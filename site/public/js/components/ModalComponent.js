@@ -13,7 +13,7 @@ export default class ModalComponent extends Component {
     <div id="myModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
-      <p>Content Modal..</p>
+      <p></p>
     </div>
     `;
   }
