@@ -1,6 +1,7 @@
 import ButtonComponent from "./ButtonComponent.js";
 import CardComponentPokemon from "./CardComponentPokemon.js";
 import Component from "./Component.js";
+import ModalComponent from "./ModalComponent.js";
 import NavbarComponent from "./NavbarComponent.js";
 
 export default class AppComponent extends Component {
@@ -39,6 +40,7 @@ export default class AppComponent extends Component {
     this.renderGridlist();
     this.renderNavbar();
     this.renderButtons();
+    AppComponent.renderModal();
   }
 
   static addPokemonToCollection(pokemon) {
@@ -71,6 +73,21 @@ export default class AppComponent extends Component {
       buttonContainer.append(spanText);
     });
     this.getCurrentPageNumber();
+  }
+
+  static renderModal() {
+    const mainContainer = document.querySelector(".app");
+    // eslint-disable-next-line no-new
+    new ModalComponent(mainContainer);
+
+    const modal = document.querySelector("#myModal");
+    // const btn = document.querySelector(".myBtn");
+    // const span = document.getElementsByClassName("close")[0];
+
+    // eslint-disable-next-line no-new
+    new ButtonComponent(mainContainer, "myBtn", "Open Modal", () => {
+      modal.style.display = "block";
+    });
   }
 
   renderNavbar() {
