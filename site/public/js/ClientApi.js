@@ -4,12 +4,13 @@ export default class ClientApi {
   currentPage;
   count;
   totalPages;
-  nextEntryEndPoint = "https://pokeapi.co/api/v2/pokemon?limit=20&offset=0";
   itemPerPage = 20;
   pageOffset;
+  pageNumber;
 
   constructor(apiEntryPoint) {
     this.currentPage = apiEntryPoint;
+
     this.setInstanceApi();
   }
 
@@ -77,8 +78,16 @@ export default class ClientApi {
   }
 
   async getCurrentPageNumber() {
-    const pageNumber = this.nextEntryEndPoint
-      ? Math.ceil(this.pageOffset / this.itemPerPage)
+    if (this.currentPage !== null) {
+      const stringParameter = this.currentPage.split("?")[1];
+      const queryString = new URLSearchParams(stringParameter);
+      this.pageOffset = queryString.get("offset");
+    }
+
+    this.pageNumber = this.currentPage
+      ? Math.floor(this.pageOffset / this.itemPerPage)
       : this.pageOffset / this.itemPerPage + 1;
+
+    return this.pageNumber;
   }
 }
