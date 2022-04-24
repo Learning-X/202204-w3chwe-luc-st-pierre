@@ -13,7 +13,7 @@ export default class CardComponentPokemon extends Component {
   render() {
     this.element.innerHTML = `
       <div class="card-container">
-        <a href="#" class="card-container__link">
+        <a id="view-item" href="#" class="card-container__link">
           <div class="card">
           <div class="card__box"></div>
           <div class="card-image__container">

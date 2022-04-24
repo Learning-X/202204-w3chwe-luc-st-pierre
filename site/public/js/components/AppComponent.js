@@ -46,11 +46,6 @@ export default class AppComponent extends Component {
     AppComponent.renderModal();
   }
 
-  static addPokemonToCollection(pokemon) {
-    // console.log(pokemon);
-    return pokemon;
-  }
-
   async renderGridlist() {
     const pokemons = await this.clientApi.getAllPokemons();
 
@@ -72,18 +67,29 @@ export default class AppComponent extends Component {
       spanText.textContent = "add";
       spanText.className = "btn-text";
       buttonContainer.append(spanText);
+
+      const modal = document.querySelector("#myModal");
+
+      const anchorTag = card.element.querySelector("#view-item");
+      anchorTag.addEventListener("click", () => {
+        modal.style.display = "block";
+      });
     });
     this.getCurrentPageNumber();
   }
 
   static renderModal() {
     const mainContainer = document.querySelector(".app");
+
     // eslint-disable-next-line no-new
     new ModalComponent(mainContainer);
 
     const modal = document.querySelector("#myModal");
-    // const btn = document.querySelector(".myBtn");
-    // const span = document.getElementsByClassName("close")[0];
+
+    const span = document.getElementsByClassName("close")[0];
+    span.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
 
     // eslint-disable-next-line no-new
     new ButtonComponent(mainContainer, "myBtn", "Open Modal", () => {
