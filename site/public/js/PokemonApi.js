@@ -12,7 +12,8 @@ export default class PokemonApi {
   }
 
   async addPokemon(pokemon) {
-    const ressource = pokemon;
+    const ressource = { ...pokemon };
+    delete ressource.id;
     const pokemonObject = {
       method: "POST",
       headers: { "Content-Type": "application/json" },

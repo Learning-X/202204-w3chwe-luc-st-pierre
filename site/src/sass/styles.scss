@@ -279,6 +279,12 @@ body {
           justify-content: center;
           text-decoration: none;
         }
+
+        & .height,
+        .weight {
+          color: #ffcb06;
+        }
+
         & .space {
           padding: 0 0.4rem;
         }
@@ -358,7 +364,7 @@ body {
       & .btn {
         color: #fff;
         box-shadow: none;
-        background-color: #1599d1;
+        background-color: #2468b1;
         display: inline-flex;
         padding: 8px 16px;
         font-size: 1rem;
@@ -399,7 +405,7 @@ body {
 
 .bottom-container {
   position: fixed;
-  z-index: 9999;
+  z-index: 9998;
   bottom: 0;
   left: 0;
   right: 0;
@@ -439,5 +445,78 @@ body {
       border: 0;
       cursor: pointer;
     }
+  }
+}
+
+#snackbar {
+  z-index: 9999;
+  font-size: 1.5rem;
+  font-weight: 400;
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 2px solid #ffcb06;
+  color: #fff;
+  text-align: center;
+  border-radius: 16px;
+  padding: 1.5rem;
+  position: fixed;
+  z-index: 1;
+  left: 85%;
+  bottom: 110px;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {
+    bottom: 80px;
+    opacity: 0;
+  }
+  to {
+    bottom: 110px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    bottom: 80px;
+    opacity: 0;
+  }
+  to {
+    bottom: 110px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 110px;
+    opacity: 1;
+  }
+  to {
+    bottom: 80px;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 110px;
+    opacity: 1;
+  }
+  to {
+    bottom: 80px;
+    opacity: 0;
   }
 }

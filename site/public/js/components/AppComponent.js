@@ -39,6 +39,8 @@ export default class AppComponent extends Component {
         <p class="page-count">Page Count</p>
         </div>
       </div>
+
+      <div id="snackbar"></div>
     `;
 
     this.renderNavbar();
@@ -48,7 +50,7 @@ export default class AppComponent extends Component {
   }
 
   getUrl() {
-    return window.location.pathname === "/site/public/index.html"
+    return window.location.pathname === "/index.html"
       ? this.renderGridlist()
       : this.renderMyPokemonGridlist();
   }
@@ -90,9 +92,17 @@ export default class AppComponent extends Component {
     this.getCurrentPageNumber();
   }
 
+  static renderSnakbar(pokemon) {
+    const snakbar = document.getElementById("snackbar");
+    snakbar.textContent = `${pokemon.name} wad added!`;
+    snakbar.className = "show";
+    setTimeout(() => {
+      snakbar.className = snakbar.className.replace("show", "");
+    }, 3000);
+  }
+
   async renderGridlist() {
     const pokemons = await this.clientApi.getAllPokemonClientApi();
-
     const gridlist = this.element.querySelector(".grid-list");
     gridlist.innerHTML = "";
 
@@ -104,6 +114,10 @@ export default class AppComponent extends Component {
       // eslint-disable-next-line no-new
       new ButtonComponent(btnContainer, "btn", "", async () => {
         this.pokemonApi.addPokemon(pokemon);
+        AppComponent.renderSnakbar(pokemon);
+        setTimeout(() => {
+          this.renderGridlist();
+        }, 300);
       });
 
       const buttonContainer = card.element.querySelector(".btn");
@@ -114,8 +128,8 @@ export default class AppComponent extends Component {
 
       const modal = document.querySelector("#myModal");
 
-      const anchorTag = card.element.querySelector("#view-item");
-      anchorTag.addEventListener("click", () => {
+      const divTag = card.element.querySelector("#view-item");
+      divTag.addEventListener("click", () => {
         modal.style.display = "block";
       });
     });
