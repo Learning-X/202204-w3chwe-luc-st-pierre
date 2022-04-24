@@ -86,8 +86,6 @@ export default class AppComponent extends Component {
 
   renderButtons() {
     const buttons = this.element.querySelector(".buttons");
-    const buttonPreviousPage = this.element.querySelector(".buttons__previous");
-    const buttonNextPage = this.element.querySelector(".buttons__next");
 
     // eslint-disable-next-line no-new
     new ButtonComponent(buttons, "button buttons__previous", "Prev", async () =>
