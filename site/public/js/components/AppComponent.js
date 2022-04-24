@@ -64,7 +64,7 @@ export default class AppComponent extends Component {
 
       // eslint-disable-next-line no-new
       new ButtonComponent(btnContainer, "btn", "", async () => {
-        this.pokemonApi.sendPokemon(pokemon);
+        this.pokemonApi.addPokemon(pokemon);
       });
 
       const buttonContainer = card.element.querySelector(".btn");
