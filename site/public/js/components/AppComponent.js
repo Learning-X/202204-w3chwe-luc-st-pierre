@@ -32,6 +32,7 @@ export default class AppComponent extends Component {
 
       <div class="bottom-container">
         <div class="buttons">
+        <p class="page-count">Page Count</p>
         </div>
       </div>
     `;
@@ -88,8 +89,12 @@ export default class AppComponent extends Component {
     this.renderGridlist();
   }
 
-  renderButtons() {
+  async renderButtons() {
     const buttons = this.element.querySelector(".buttons");
+    const pageCount = this.element.querySelector(".buttons .page-count");
+    const numberOfPAges = await this.applicationAPI.setInstanceApi();
+    // console.log(await this.applicationAPI.setInstanceApi());
+    pageCount.textContent = `page ${1} of ${numberOfPAges}`;
 
     // eslint-disable-next-line no-new
     new ButtonComponent(buttons, "button buttons__previous", "Prev", async () =>
