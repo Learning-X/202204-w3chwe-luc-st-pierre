@@ -22,7 +22,7 @@ export default class PokemonApi {
     }
   }
 
-  async deletePokemon(id) {
+  async removePokemon(id) {
     const url = `${this.apiEntryPoint}/${id}`;
     const ressource = {
       method: "DELETE",
