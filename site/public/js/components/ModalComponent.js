@@ -9,11 +9,9 @@ export default class ModalComponent extends Component {
 
   render() {
     this.element.innerHTML = `
-
     <div id="myModal" class="modal">
     <div class="modal-content">
-      <span class="close">&times;</span>
-      <p></p>
+    
     </div>
     `;
   }
