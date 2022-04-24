@@ -163,17 +163,17 @@ body {
 
 // main
 .grid-list {
-  width: calc(100% + 16px);
-  display: flex;
-  flex-wrap: wrap;
-  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(292px, 1fr));
+  grid-gap: 20px;
+  align-items: stretch;
 }
 
 .grid-item {
   padding: 1rem;
   margin-bottom: 1rem;
   flex-grow: 0;
-  max-width: 25%;
+  width: 100%;
   flex-basis: 25%;
 }
 

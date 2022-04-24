@@ -48,7 +48,7 @@ export default class AppComponent extends Component {
   }
 
   getUrl() {
-    return window.location.pathname === "/index.html"
+    return window.location.pathname === "/site/public/index.html"
       ? this.renderGridlist()
       : this.renderMyPokemonGridlist();
   }
