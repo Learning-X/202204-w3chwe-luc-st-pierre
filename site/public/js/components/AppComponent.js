@@ -13,7 +13,6 @@ export default class AppComponent extends Component {
     this.render();
   }
 
-  // <nav class="navbar"></nav>
   render() {
     this.element.innerHTML = `
     <div class="navbar-container">
@@ -38,6 +37,8 @@ export default class AppComponent extends Component {
       </div>
     `;
     this.renderGridlist();
+    this.renderNavbar();
+    this.renderButtons();
   }
 
   static addPokemonToCollection(pokemon) {
@@ -48,25 +49,8 @@ export default class AppComponent extends Component {
   async renderGridlist() {
     const pokemons = await this.applicationAPI.getAllPokemons();
 
-    const navbarContainer = this.element.querySelector(".navbar-container");
-
-    // eslint-disable-next-line no-new
-    new NavbarComponent(navbarContainer);
-
     const gridlist = this.element.querySelector(".grid-list");
     gridlist.innerHTML = "";
-
-    const buttons = this.element.querySelector(".buttons");
-
-    // eslint-disable-next-line no-new
-    new ButtonComponent(buttons, "button buttons__previous", "Prev", async () =>
-      this.applicationAPI.getPreviousPage()
-    );
-
-    // eslint-disable-next-line no-new
-    new ButtonComponent(buttons, "button buttons__next", "Next", async () =>
-      this.applicationAPI.getNextPage()
-    );
 
     pokemons.forEach((pokemon) => {
       const card = new CardComponentPokemon(gridlist, pokemon);
@@ -75,7 +59,9 @@ export default class AppComponent extends Component {
 
       // eslint-disable-next-line no-new
       new ButtonComponent(btnContainer, "btn", "", () =>
-        AppComponent.addPokemonToCollection(pokemon)
+        window.location.assign(
+          `./pokemon-details.html?id=${pokemon.id}&api=${this.applicationAPI}`
+        )
       );
 
       const buttonContainer = card.element.querySelector(".btn");
@@ -84,5 +70,33 @@ export default class AppComponent extends Component {
       spanText.className = "btn-text";
       buttonContainer.append(spanText);
     });
+  }
+
+  renderNavbar() {
+    const navbarContainer = this.element.querySelector(".navbar-container");
+
+    // eslint-disable-next-line no-new
+    new NavbarComponent(navbarContainer);
+  }
+
+  async nextPage() {
+    this.applicationAPI.getNextPage();
+    this.renderGridlist();
+  }
+
+  renderButtons() {
+    const buttons = this.element.querySelector(".buttons");
+    const buttonPreviousPage = this.element.querySelector(".buttons__previous");
+    const buttonNextPage = this.element.querySelector(".buttons__next");
+
+    // eslint-disable-next-line no-new
+    new ButtonComponent(buttons, "button buttons__previous", "Prev", async () =>
+      this.applicationAPI.getPreviousPage()
+    );
+
+    // eslint-disable-next-line no-new
+    new ButtonComponent(buttons, "button buttons__next", "Next", async () =>
+      this.nextPage()
+    );
   }
 }
