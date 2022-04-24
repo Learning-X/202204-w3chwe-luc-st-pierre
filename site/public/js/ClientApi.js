@@ -42,7 +42,7 @@ export default class ClientApi {
       const pokemonObject = {
         id: pokemon.id,
         name: pokemon.name,
-        habilities: [], // will add later
+        habilities: [pokemon.abilities], // will add later
         imgUrl: pokemon?.sprites.other.dream_world.front_default,
         height: pokemon.height,
         weight: pokemon.weight,

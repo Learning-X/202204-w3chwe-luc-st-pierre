@@ -7,6 +7,7 @@ import NavbarComponent from "./NavbarComponent.js";
 export default class AppComponent extends Component {
   clientApi;
   pokemonApi;
+  pokemonData;
 
   constructor(parentElement, pokemonApi, clientApi) {
     super(parentElement, "container", "div");
@@ -24,7 +25,11 @@ export default class AppComponent extends Component {
       <div class="header-container">
         <header class="header">
           <p class="header__subtitle">All the Pokémon in one place</p>
-          <h1 class="header__title">Create your collection</h1>
+          <h1 class="header__title">${
+            window.location.pathname === "/index.html"
+              ? "Create your collection"
+              : "My Pokémon"
+          }  </h1>
         </header>
       </div>
 
@@ -34,7 +39,11 @@ export default class AppComponent extends Component {
         </section>
       </main>
 
-      <div class="bottom-container">
+      <div class="bottom-container ${
+        window.location.pathname === "/index.html"
+          ? ""
+          : "bottom-container--hide"
+      }">
         <div class="buttons">
         <p class="page-count">Page Count</p>
         </div>
@@ -115,9 +124,6 @@ export default class AppComponent extends Component {
       new ButtonComponent(btnContainer, "btn", "", async () => {
         this.pokemonApi.addPokemon(pokemon);
         AppComponent.renderSnakbar(pokemon);
-        setTimeout(() => {
-          this.renderGridlist();
-        }, 300);
       });
 
       const buttonContainer = card.element.querySelector(".btn");
@@ -127,9 +133,26 @@ export default class AppComponent extends Component {
       buttonContainer.append(spanText);
 
       const modal = document.querySelector("#myModal");
+      const modalContent = document.querySelector(".modal-content");
 
       const divTag = card.element.querySelector("#view-item");
+
       divTag.addEventListener("click", () => {
+        const name =
+          pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+
+        modalContent.innerHTML = `
+          <div class="modal-info">
+            <div class="modal-info__left">
+              <img src="${pokemon.imgUrl}" alt="${name}" class="card__image" />
+            </div>
+            <div class="modal-info__right">
+              <h2 class="modal-info__title">${name}</h2>
+              <p class="modal-info__abilities"><span class="modal-info--white">abilities:</span> ${pokemon.habilities[0][0].ability.name}</p>
+            </div>
+          </div>
+        `;
+
         modal.style.display = "block";
       });
     });
@@ -144,8 +167,7 @@ export default class AppComponent extends Component {
 
     const modal = document.querySelector("#myModal");
 
-    const span = document.getElementsByClassName("close")[0];
-    span.addEventListener("click", () => {
+    modal.addEventListener("click", () => {
       modal.style.display = "none";
     });
 
